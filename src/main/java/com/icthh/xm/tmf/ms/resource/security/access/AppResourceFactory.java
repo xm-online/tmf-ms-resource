@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.resource.config;
+package com.icthh.xm.tmf.ms.resource.security.access;
 
 import com.icthh.xm.commons.permission.access.ResourceFactory;
 import org.springframework.stereotype.Component;

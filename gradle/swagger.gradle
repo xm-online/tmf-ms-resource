@@ -7,11 +7,9 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "org.openapitools:openapi-generator-gradle-plugin:3.3.1"
+        classpath "org.openapitools:openapi-generator-gradle-plugin:4.2.2"
     }
 }
-
-apply plugin: 'org.openapi.generator'
 
 task openApiGenerateAdmin(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
     generatorName = "spring"
@@ -24,6 +22,7 @@ task openApiGenerateAdmin(type: org.openapitools.generator.gradle.plugin.tasks.G
     supportingFilesConstrainedTo = ["ApiUtil.java"]
     configOptions = [delegatePattern: "true"]
     validateSpec = true
+    importMappings = [Problem:"org.zalando.problem.Problem"]
 }
 
 task openApiGenerateRegular(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
@@ -37,6 +36,7 @@ task openApiGenerateRegular(type: org.openapitools.generator.gradle.plugin.tasks
     supportingFilesConstrainedTo = ["ApiUtil.java"]
     configOptions = [delegatePattern: "true"]
     validateSpec = true
+    importMappings = [Problem:"org.zalando.problem.Problem"]
 }
 
 task allOpenApiGenerate(dependsOn: ['openApiGenerateAdmin', 'openApiGenerateRegular'])

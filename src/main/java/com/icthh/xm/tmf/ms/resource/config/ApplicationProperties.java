@@ -1,12 +1,13 @@
 package com.icthh.xm.tmf.ms.resource.config;
 
 import com.icthh.xm.commons.lep.TenantScriptStorage;
-import java.util.Collections;
-import java.util.List;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Properties specific to Resource.

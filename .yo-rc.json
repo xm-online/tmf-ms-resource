@@ -4,7 +4,7 @@
       "packageName": "com.icthh.xm.tmf.ms.resource",
       "nativeLanguage": "en"
     },
-    "jhipsterVersion": "5.7.2",
+    "jhipsterVersion": "6.5.1",
     "applicationType": "microservice",
     "baseName": "resource",
     "packageName": "com.icthh.xm.tmf.ms.resource",
@@ -22,12 +22,15 @@
     "serviceDiscoveryType": "consul",
     "buildTool": "gradle",
     "enableSwaggerCodegen": true,
-    "jwtSecretKey": "MDljMTdiNzNmMTVmYTM1ZmE5ODRjNWY0MTdmMzk1NWU0MjQ5NWM1MDM3ZDYzZWQ5ZmQ4MmJlMjg0YjM0MzgxOTdkODZhOTYwYWViYTE5MWU3ZWNjZTgwNTZiZTE2NzBlNWVjZDdlYzU3YWU1YjhmM2IxNTY4NzEyZDBlZjk0YTM=",
+    "jwtSecretKey": "ZmJkODI4ZWY5ZTQ1NGUyYThjNjJlMzJmNzc3NjVmNDJlZTFmZDZjMWE2YjZkOThlYTY5MjFiYjEzMWFjYjFiMTMwNTE1M2Q5NDc2NTk2N2FiMjVkMjkwNmUyZWViZDFlOGZiMTJmZTAwMThhYjcwNjNhNGZhNmZhNTIzYjNmYjM=",
+    "embeddableLaunchScript": false,
     "testFrameworks": [
       "gatling",
       "cucumber"
     ],
     "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": true,
     "clientPackageManager": "npm",
@@ -35,6 +38,7 @@
     "languages": [
       "en"
     ],
+    "blueprints": [],
     "skipClient": true,
     "skipUserManagement": true
   }

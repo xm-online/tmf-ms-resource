@@ -97,17 +97,19 @@ if (OperatingSystem.current().isWindows()) {
     }
 }
 
-bootWar {
-    mainClassName = 'com.icthh.xm.tmf.ms.resource.ResourceApp'
-}
-
-war {
-}
-
 defaultTasks "bootWar"
 
 springBoot {
     mainClassName = "com.icthh.xm.tmf.ms.resource.ResourceApp"
+}
+
+bootWar {
+    mainClassName = 'com.icthh.xm.tmf.ms.resource.ResourceApp'
+    manifest {
+        attributes(
+            "Implementation-Version": archiveVersion
+        )
+    }
 }
 
 test {

@@ -1,4 +1,4 @@
-package com.icthh.xm.tmf.ms.resource.web.rest;
+package com.icthh.xm.tmf.ms.resource;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -130,7 +130,7 @@ public final class TestUtil {
      * @return the FormattingConversionService
      */
     public static FormattingConversionService createFormattingConversionService() {
-        DefaultFormattingConversionService dfcs = new DefaultFormattingConversionService ();
+        DefaultFormattingConversionService dfcs = new DefaultFormattingConversionService();
         DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
         registrar.setUseIsoFormat(true);
         registrar.registerFormatters(dfcs);

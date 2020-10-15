@@ -4,7 +4,7 @@ info:
     description: This is Swagger UI environment generated for the TMF Resource Inventory Management specification
     version: '2.0'
 host: serverRoot
-basePath: /api/resourceInventoryManagement
+basePath: /api/resourceInventoryManagement/v2
 schemes:
     - https
 consumes:

@@ -8,16 +8,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class HeaderRequestExtractor {
 
-    public String getProfile() {
+    public String get(String headerName) {
         HttpServletRequest request =
             ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return request.getHeader("profile");
-    }
-
-    public String getChannelId() {
-        HttpServletRequest request =
-            ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return request.getHeader("channel_id");
+        return request.getHeader(headerName);
     }
 
 }

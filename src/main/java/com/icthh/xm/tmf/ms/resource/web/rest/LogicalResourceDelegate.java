@@ -18,7 +18,7 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
 
     @Timed
     @LogicExtensionPoint(value = "GetResource", resolver = ProfileChannelKeyResolver.class)
-    @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.UPDATE')")
+    @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.GET.LIST')")
     @PrivilegeDescription("Privilege to update a logical resource")
     @Override
     public ResponseEntity<List<LogicalResource>> retrieveLogicalResource(String id) {

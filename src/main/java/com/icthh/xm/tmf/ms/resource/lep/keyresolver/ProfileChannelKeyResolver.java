@@ -19,8 +19,8 @@ public class ProfileChannelKeyResolver extends AppendLepKeyResolver {
                                          LepMethod method,
                                          LepManagerService managerService) {
 
-        String profile = translateToLepConvention(headerRequestExtractor.get("profile"));
-        String channelId = translateToLepConvention(headerRequestExtractor.get("channel_id"));
+        String profile = translateToLepConvention(headerRequestExtractor.get("Profile"));
+        String channelId = translateToLepConvention(headerRequestExtractor.get("Channel"));
         return new String[]{profile, channelId};
     }
 }

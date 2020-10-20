@@ -31,10 +31,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @ExtendWith(SpringExtension.class)
 class ProfileChannelKeyResolverTest {
-    private static final String PROFILE_KEY = "profile";
+    private static final String PROFILE_KEY = "Profile";
     private static final String PROFILE_VALUE = "TEST-PROFILE";
     private static final String PROFILE_VALUE_RESOLVED = "TEST_PROFILE";
-    private static final String CHANNEL_KEY = "channel_id";
+    private static final String CHANNEL_KEY = "Channel";
     private static final String CHANNEL_VALUE = "TEST-CHANNEL";
     private static final String CHANNEL_VALUE_RESOLVED = "TEST_CHANNEL";
 

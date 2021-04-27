@@ -1,6 +1,7 @@
 package com.icthh.xm.tmf.ms.resource.lep;
 
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_KEY_COMMONS;
+import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_KEY_JDBC;
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_KEY_SERVICES;
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_KEY_TEMPLATES;
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_SUB_KEY_PERMISSION_SERVICE;
@@ -16,6 +17,7 @@ import com.icthh.xm.lep.api.ScopedContext;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -28,6 +30,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
     private final TenantConfigService tenantConfigService;
 
     private final RestTemplate restTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     private final CommonsService commonsService;
     private final PermissionCheckService permissionCheckService;
@@ -46,6 +49,7 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
         // templates
         Map<String, Object> templates = new HashMap<>();
         templates.put(BINDING_SUB_KEY_TEMPLATE_REST, restTemplate);
+        templates.put(BINDING_KEY_JDBC, jdbcTemplate);
 
         executionContext.setValue(BINDING_KEY_TEMPLATES, templates);
     }

@@ -7,6 +7,7 @@ import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
 import com.icthh.xm.tmf.ms.resource.lep.keyresolver.ProfileChannelKeyResolver;
 import com.icthh.xm.tmf.ms.resource.web.api.LogicalResourceApiDelegate;
 import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResource;
+import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResourceUpdate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,14 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
                                                                      String characteristicName, String characteristicValue, String placeRole, String partyRoleName,
                                                                      String partyRolePartyId, String partyRolePartyName, String relatedPartyName,
                                                                      String relatedPartyRole, String noteAuthor, OffsetDateTime noteDate, String noteText) {
+        return ResponseEntity.ok().build();
+    }
+
+    @LogicExtensionPoint(value = "UpdateResource", resolver = ProfileChannelKeyResolver.class)
+    @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.UPDATE')")
+    @PrivilegeDescription("Privilege to update a logical resource")
+    @Override
+    public ResponseEntity<LogicalResource> updateLogicalResource(String id, LogicalResourceUpdate logicalResource) {
         return ResponseEntity.ok().build();
     }
 }

@@ -5,6 +5,7 @@ import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
 import com.icthh.xm.tmf.ms.resource.lep.keyresolver.ProfileChannelKeyResolver;
+import com.icthh.xm.tmf.ms.resource.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.resource.web.api.LogicalResourceApiDelegate;
 import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResource;
 import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResourceUpdate;
@@ -41,7 +42,7 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
         return ResponseEntity.ok().build();
     }
 
-    @LogicExtensionPoint(value = "UpdateResource", resolver = ProfileChannelKeyResolver.class)
+    @LogicExtensionPoint(value = "UpdateResource", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.UPDATE')")
     @PrivilegeDescription("Privilege to update a logical resource")
     @Override

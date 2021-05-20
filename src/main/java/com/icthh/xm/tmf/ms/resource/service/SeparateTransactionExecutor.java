@@ -1,5 +1,6 @@
 package com.icthh.xm.tmf.ms.resource.service;
 
+import java.util.concurrent.Callable;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,12 +19,8 @@ public class SeparateTransactionExecutor {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @SneakyThrows
-    public <T> T doInSeparateTransaction(Task<T> task) {
-        return task.doWork();
-    }
-
-    public interface Task<T> {
-        T doWork() throws Exception;
+    public <T> T doInSeparateTransaction(Callable<T> task) {
+        return task.call();
     }
 
 }

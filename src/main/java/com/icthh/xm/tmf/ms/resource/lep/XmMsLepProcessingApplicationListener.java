@@ -7,6 +7,7 @@ import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_K
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_SUB_KEY_PERMISSION_SERVICE;
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_SUB_KEY_SERVICE_TENANT_CONFIG_SERICE;
 import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_SUB_KEY_TEMPLATE_REST;
+import static com.icthh.xm.tmf.ms.resource.lep.LepXmAccountMsConstants.BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR;
 
 import com.icthh.xm.commons.config.client.service.TenantConfigService;
 import com.icthh.xm.commons.lep.commons.CommonsExecutor;
@@ -14,6 +15,7 @@ import com.icthh.xm.commons.lep.commons.CommonsService;
 import com.icthh.xm.commons.lep.spring.SpringLepProcessingApplicationListener;
 import com.icthh.xm.commons.permission.service.PermissionCheckService;
 import com.icthh.xm.lep.api.ScopedContext;
+import com.icthh.xm.tmf.ms.resource.service.SeparateTransactionExecutor;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -34,14 +36,17 @@ public class XmMsLepProcessingApplicationListener extends SpringLepProcessingApp
 
     private final CommonsService commonsService;
     private final PermissionCheckService permissionCheckService;
+    private final SeparateTransactionExecutor separateTransactionExecutor;
 
 
     @Override
     protected void bindExecutionContext(ScopedContext executionContext) {
         // services
         Map<String, Object> services = new HashMap<>();
+
         services.put(BINDING_SUB_KEY_SERVICE_TENANT_CONFIG_SERICE, tenantConfigService);
         services.put(BINDING_SUB_KEY_PERMISSION_SERVICE, permissionCheckService);
+        services.put(BINDING_SUB_KEY_SERVICE_SEPARATE_TRANSACTION_EXECUTOR, separateTransactionExecutor);
 
         executionContext.setValue(BINDING_KEY_COMMONS, new CommonsExecutor(commonsService));
         executionContext.setValue(BINDING_KEY_SERVICES, services);

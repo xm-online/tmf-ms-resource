@@ -4,6 +4,7 @@ import com.icthh.xm.commons.config.client.service.TenantConfigService;
 import com.icthh.xm.commons.lep.commons.CommonsService;
 import com.icthh.xm.commons.permission.service.PermissionCheckService;
 import com.icthh.xm.tmf.ms.resource.lep.XmMsLepProcessingApplicationListener;
+import com.icthh.xm.tmf.ms.resource.service.SeparateTransactionExecutor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,7 @@ public class LepAppEventListenerConfiguration {
         TenantConfigService tenantConfigService,
         @Qualifier("loadBalancedRestTemplate") RestTemplate restTemplate,
         JdbcTemplate jdbcTemplate,
+        SeparateTransactionExecutor separateTransactionExecutor,
         CommonsService commonsService,
         PermissionCheckService permissionCheckService) {
 
@@ -29,7 +31,8 @@ public class LepAppEventListenerConfiguration {
             restTemplate,
             jdbcTemplate,
             commonsService,
-            permissionCheckService);
+            permissionCheckService,
+            separateTransactionExecutor);
     }
 
 }

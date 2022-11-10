@@ -336,7 +336,6 @@ wrapper {
 task stage(dependsOn: 'bootWar') {
 }
 
-bootWar.dependsOn war
 compileJava.dependsOn processResources
 processResources.dependsOn cleanResources,bootBuildInfo
 bootBuildInfo.mustRunAfter cleanResources

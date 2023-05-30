@@ -38,7 +38,7 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
                                                                      OffsetDateTime startDate, String version, String value, String resourceRelationshipType,
                                                                      String characteristicName, String characteristicValue, String placeRole, String partyRoleName,
                                                                      String partyRolePartyId, String partyRolePartyName, String relatedPartyName,
-                                                                     String relatedPartyRole, String noteAuthor, OffsetDateTime noteDate, String noteText) {
+                                                                     String relatedPartyRole, String noteAuthor, OffsetDateTime noteDate, String noteText, String resourceStatus) {
         return ResponseEntity.ok().build();
     }
 

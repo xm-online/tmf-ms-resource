@@ -379,6 +379,11 @@ paths:
                   description: 'For filtering: Text of the note'
                   schema:
                       type: string
+                - name: resourceStatus
+                  in: query
+                  description: 'For filtering: Resource status'
+                  schema:
+                    type: string
             responses:
                 200:
                     description: Ok
@@ -1500,6 +1505,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Note'
+                resourceStatus:
+                  $ref: '#/components/schemas/ResourceStatusType'
             description: Logic resource is a type of resource that describes the common
                 set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN,
                 IP Addresses) in the inventory.
@@ -1570,6 +1577,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Note'
+                resourceStatus:
+                  $ref: '#/components/schemas/ResourceStatusType'
             description: |-
                 Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory.
                 Skipped properties: id,href
@@ -1640,6 +1649,8 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Note'
+                resourceStatus:
+                  $ref: '#/components/schemas/ResourceStatusType'
             description: |-
                 Logic resource is a type of resource that describes the common set of attributes shared by all concrete logical resources (e.g. TPE, MSISDN, IP Addresses) in the inventory.
                 Skipped properties: id,href
@@ -1737,6 +1748,17 @@ components:
                     type: string
                     description: Text of the note
             description: Extra information about the ticket or a product order
+        ResourceStatusType:
+          type: string
+          description: ResourceStatusType enumerations
+          enum:
+            - standby
+            - alarm
+            - available
+            - reserved
+            - unknown
+            - suspended
+            - in-use
         ResourceRef:
             type: object
             properties:

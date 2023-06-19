@@ -114,6 +114,17 @@ spring:
   output:
     ansi:
       console-available: true
+  kafka:
+    bootstrap-servers: localhost:9093
+    consumer:
+      group-id: resource
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      listener:
+        concurrency: 16
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 security:
   oauth2:
     resource:

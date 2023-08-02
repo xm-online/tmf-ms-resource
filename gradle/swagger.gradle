@@ -39,7 +39,19 @@ task openApiGenerateRegular(type: org.openapitools.generator.gradle.plugin.tasks
     importMappings = [Problem:"org.zalando.problem.Problem"]
 }
 
-task allOpenApiGenerate(dependsOn: ['openApiGenerateAdmin', 'openApiGenerateRegular'])
+task openApiGenerateV4(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/main/resources/swagger/api_v4.yml".toString()
+    outputDir = "$buildDir/openapi".toString()
+    apiPackage = "com.icthh.xm.tmf.ms.resource.web.api.v4"
+    modelPackage = "com.icthh.xm.tmf.ms.resource.web.api.model.v4"
+    apiFilesConstrainedTo = [""]
+    modelFilesConstrainedTo = [""]
+    supportingFilesConstrainedTo = ["ApiUtil.java"]
+    configOptions = [delegatePattern: "true"]
+    additionalProperties = [useTags: "true"]
+}
+task allOpenApiGenerate(dependsOn: ['openApiGenerateAdmin', 'openApiGenerateRegular', 'openApiGenerateV4'])
 
 sourceSets {
     main {

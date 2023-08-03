@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @LepService(group = "service")
 public class LogicalResourceV4Delegate implements LogicalResourceV4ApiDelegate {
 
-    @LogicExtensionPoint(value = "UpdateResource", resolver = ProfileKeyResolver.class)
+    @LogicExtensionPoint(value = "UpdateResourceV4", resolver = ProfileKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.UPDATE')")
     @PrivilegeDescription("Privilege to update a logical resource")
     @Override

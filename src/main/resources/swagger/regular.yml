@@ -576,7 +576,7 @@ paths:
                             $ref: '#/components/schemas/LogicalResource_Update'
                 required: true
             responses:
-                201:
+                200:
                     description: Updated
                     content:
                         application/json:

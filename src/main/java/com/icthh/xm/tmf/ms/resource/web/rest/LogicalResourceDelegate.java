@@ -8,9 +8,12 @@ import com.icthh.xm.tmf.ms.resource.lep.keyresolver.ProfileChannelKeyResolver;
 import com.icthh.xm.tmf.ms.resource.lep.keyresolver.ProfileKeyResolver;
 import com.icthh.xm.tmf.ms.resource.web.api.LogicalResourceApiDelegate;
 import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResource;
+import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResourceCreate;
 import com.icthh.xm.tmf.ms.resource.web.api.model.LogicalResourceUpdate;
 import java.time.OffsetDateTime;
 import java.util.List;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
@@ -48,5 +51,21 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
     @Override
     public ResponseEntity<LogicalResource> updateLogicalResource(String id, LogicalResourceUpdate logicalResource) {
         return ResponseEntity.ok().build();
+    }
+
+    @LogicExtensionPoint(value = "PatchResource", resolver = ProfileKeyResolver.class)
+    @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.UPDATE')")
+    @PrivilegeDescription("Privilege to update a logical resource")
+    @Override
+    public ResponseEntity<LogicalResource> patchLogicalResource(String id, LogicalResourceUpdate logicalResource) {
+        return ResponseEntity.ok().build();
+    }
+
+    @LogicExtensionPoint(value = "CreateResource", resolver = ProfileKeyResolver.class)
+    @PreAuthorize("hasPermission({'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.CREATE')")
+    @PrivilegeDescription("Privilege to create a logical resource")
+    @Override
+    public ResponseEntity<LogicalResource> createLogicalResource(LogicalResourceCreate logicalResource) {
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

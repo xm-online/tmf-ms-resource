@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>utf-8</charset>
-            <Pattern>%d %-5level [%thread] [%X{rid}] %logger{0}: %msg%n</Pattern>
+            <Pattern>${LOG_STDOUT_PATTERN:-%d %-5level [%thread] [${springAppName:-}] [%X{traceId:-}] [%X{rid}] %logger{0}: %msg%n}</Pattern>
         </encoder>
     </appender>
 
@@ -12,9 +13,9 @@
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender> 
     
-    <logger name="com.icthh.xm" level="#logback.loglevel#"/>
+    <logger name="com.icthh.xm" level="INFO"/>
 
-    <logger name="io.github.jhipster" level="#logback.loglevel#"/>
+    <logger name="io.github.jhipster" level="INFO"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
@@ -56,7 +57,7 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="#logback.loglevel#">
+    <root level="INFO">
         <appender-ref ref="${LOG_APPENDER_NAME:-STDOUT}"/>
     </root>
 

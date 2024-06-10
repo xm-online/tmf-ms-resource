@@ -1758,6 +1758,7 @@ components:
             - reserved
             - unknown
             - suspended
+            - in-processing
             - in-use
         ResourceRef:
             type: object

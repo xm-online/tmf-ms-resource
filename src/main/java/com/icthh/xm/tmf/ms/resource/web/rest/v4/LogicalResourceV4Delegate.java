@@ -22,4 +22,12 @@ public class LogicalResourceV4Delegate implements LogicalResourceV4ApiDelegate {
     public ResponseEntity<LogicalResource> updateLogicalResource(String id, LogicalResourceUpdate logicalResource) {
         return ResponseEntity.ok().build();
     }
+
+    @LogicExtensionPoint(value = "PatchResourceV4", resolver = ProfileKeyResolver.class)
+    @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.PATCH.V4')")
+    @PrivilegeDescription("Privilege to patch a logical resource")
+    @Override
+    public ResponseEntity<LogicalResource> patchLogicalResource(String id, LogicalResourceUpdate logicalResource) {
+        return ResponseEntity.ok().build();
+    }
 }

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/xm-online/tmf-ms-resource.svg?branch=master)](https://travis-ci.org/xm-online/tmf-ms-resource) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?&metric=sqale_index&branch=master&project=xm-online:tmf-ms-resource)](https://sonarcloud.io/dashboard/index/xm-online:tmf-ms-resource) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?&metric=ncloc&branch=master&project=xm-online:tmf-ms-resource)](https://sonarcloud.io/dashboard/index/xm-online:tmf-ms-resource) [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?&metric=coverage&branch=master&project=xm-online:tmf-ms-resource)](https://sonarcloud.io/dashboard/index/xm-online:tmf-ms-resource)
+[![Build Status](https://travis-ci.org/xm-online/tmf-ms-resource.svg?branch=master)](https://travis-ci.org/xm-online/tmf-ms-resource) 
 
 # resource
 
@@ -57,24 +57,6 @@ To launch your application's tests, run:
     ./gradlew test integrationTest jacocoTestReport
 
 For more information, refer to the [Running tests page][].
-
-### Code quality
-
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
-
-```
-docker-compose -f src/main/docker/sonar.yml up -d
-```
-
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the gradle plugin.
-
-Then, run a Sonar analysis:
-
-```
-./gradlew -Pprod clean check jacocoTestReport sonarqube
-```
-
-For more information, refer to the [Code quality page][].
 
 ## Using Docker to simplify development (optional)
 

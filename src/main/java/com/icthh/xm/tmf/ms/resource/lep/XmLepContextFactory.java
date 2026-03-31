@@ -1,0 +1,59 @@
+package com.icthh.xm.tmf.ms.resource.lep;
+
+import com.icthh.xm.commons.config.client.service.TenantConfigService;
+import com.icthh.xm.commons.lep.api.LepContextFactory;
+import com.icthh.xm.commons.lep.commons.CommonsExecutor;
+import com.icthh.xm.commons.lep.commons.CommonsService;
+import com.icthh.xm.commons.permission.service.PermissionCheckService;
+import com.icthh.xm.lep.api.LepMethod;
+import com.icthh.xm.tmf.ms.resource.service.SeparateTransactionExecutor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+@Component
+public class XmLepContextFactory implements LepContextFactory {
+
+    private final TenantConfigService tenantConfigService;
+    private final RestTemplate restTemplate;
+    private final JdbcTemplate jdbcTemplate;
+    private final CommonsService commonsService;
+    private final PermissionCheckService permissionCheckService;
+    private final SeparateTransactionExecutor separateTransactionExecutor;
+
+    public XmLepContextFactory(
+            TenantConfigService tenantConfigService,
+            @Qualifier("loadBalancedRestTemplate") RestTemplate restTemplate,
+            JdbcTemplate jdbcTemplate,
+            CommonsService commonsService,
+            PermissionCheckService permissionCheckService,
+            SeparateTransactionExecutor separateTransactionExecutor) {
+        this.tenantConfigService = tenantConfigService;
+        this.restTemplate = restTemplate;
+        this.jdbcTemplate = jdbcTemplate;
+        this.commonsService = commonsService;
+        this.permissionCheckService = permissionCheckService;
+        this.separateTransactionExecutor = separateTransactionExecutor;
+    }
+
+    @Override
+    public LepContext buildLepContext(LepMethod lepMethod) {
+        LepContext lepContext = new LepContext();
+
+        lepContext.commons = new CommonsExecutor(commonsService);
+
+        LepContext.Services services = new LepContext.Services();
+        services.tenantConfigService = tenantConfigService;
+        services.permissionService = permissionCheckService;
+        services.separateTransactionExecutor = separateTransactionExecutor;
+        lepContext.services = services;
+
+        LepContext.Templates templates = new LepContext.Templates();
+        templates.rest = restTemplate;
+        templates.jdbc = jdbcTemplate;
+        lepContext.templates = templates;
+
+        return lepContext;
+    }
+}

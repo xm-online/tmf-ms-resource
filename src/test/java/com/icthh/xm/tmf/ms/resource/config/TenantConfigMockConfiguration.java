@@ -2,6 +2,7 @@ package com.icthh.xm.tmf.ms.resource.config;
 
 import com.icthh.xm.commons.config.client.repository.TenantConfigRepository;
 import com.icthh.xm.commons.config.client.repository.TenantListRepository;
+import com.icthh.xm.commons.config.client.service.TenantAliasService;
 import com.icthh.xm.commons.config.client.service.TenantConfigService;
 import org.mockito.ArgumentMatchers;
 import org.springframework.context.annotation.Bean;
@@ -42,5 +43,10 @@ public class TenantConfigMockConfiguration {
     @Bean
     public TenantConfigService tenantConfigService() {
         return mock(TenantConfigService.class);
+    }
+
+    @Bean
+    public TenantAliasService tenantAliasService() {
+        return mock(TenantAliasService.class);
     }
 }

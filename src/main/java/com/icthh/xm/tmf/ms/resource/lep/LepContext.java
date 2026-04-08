@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 
 public class LepContext extends BaseLepContext {
 
-    public Object commons;
     public Services services;
     public Templates templates;
 

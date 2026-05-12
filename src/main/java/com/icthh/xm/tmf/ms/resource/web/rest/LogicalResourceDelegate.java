@@ -68,4 +68,12 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
     public ResponseEntity<LogicalResource> createLogicalResource(LogicalResourceCreate logicalResource) {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @LogicExtensionPoint(value = "DeleteResource", resolver = ProfileKeyResolver.class)
+    @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.DELETE')")
+    @PrivilegeDescription("Privilege to delete a logical resource")
+    @Override
+    public ResponseEntity<Void> deleteLogicalResource(String id) {
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

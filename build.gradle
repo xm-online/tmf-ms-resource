@@ -24,6 +24,7 @@ plugins {
     id "net.ltgt.apt-idea"
     id "net.ltgt.apt"
     id "org.liquibase.gradle"
+    id "org.sonarqube"
     id "io.spring.nohttp"
     id "com.github.spotbugs"
     id "pmd"

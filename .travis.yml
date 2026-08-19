@@ -5,6 +5,9 @@ install: true
 
 script:
   - set -e
+  - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+  - export PATH=$JAVA_HOME/bin:$PATH
+  - java -version
   - "./gradlew --no-daemon --refresh-dependencies clean check test"
   - "./gradlew -x test -Pprod --no-daemon bootWar"
   - docker login -u $DOCKER_USER -p $DOCKER_PASS

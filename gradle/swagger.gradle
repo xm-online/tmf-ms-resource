@@ -4,61 +4,53 @@
  */
 buildscript {
     repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
+        gradlePluginPortal()
+        mavenCentral()
     }
     dependencies {
-        classpath "org.openapitools:openapi-generator-gradle-plugin:4.2.2"
+        classpath "org.openapitools:openapi-generator-gradle-plugin:${openapiPluginVersion}"
     }
 }
+apply plugin: "org.openapi.generator"
 
-task openApiGenerateAdmin(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
-    generatorName = "spring"
-    inputSpec = "$rootDir/src/main/resources/swagger/admin.yml".toString()
-    outputDir = "$buildDir/openapi".toString()
-    apiPackage = "com.icthh.xm.tmf.ms.resource.web.api"
-    modelPackage = "com.icthh.xm.tmf.ms.resource.web.api.model"
-    apiFilesConstrainedTo = [""]
-    modelFilesConstrainedTo = [""]
-    supportingFilesConstrainedTo = ["ApiUtil.java"]
-    configOptions = [delegatePattern: "true"]
-    validateSpec = true
-    importMappings = [Problem:"org.zalando.problem.Problem"]
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+void createOpenApiGenerateTask(String taskName, String ymlName, String apiPackageName, String modelPackageName,
+                               boolean strict) {
+    tasks.register(taskName, GenerateTask) {
+        generatorName = "spring"
+        inputSpec = "$rootDir/src/main/resources/swagger/${ymlName}.yml".toString()
+        outputDir = layout.buildDirectory.dir("openapi").get().asFile.toString()
+        apiPackage = apiPackageName
+        modelPackage = modelPackageName
+        apiFilesConstrainedTo = [""]
+        modelFilesConstrainedTo = [""]
+        supportingFilesConstrainedTo = ["ApiUtil.java"]
+        configOptions = [delegatePattern: "true", title: "resource", useSpringBoot3: "true", useJakartaEe: "true"]
+        if (strict) {
+            validateSpec = true
+            importMappings = [Problem:"org.zalando.problem.Problem"]
+        } else {
+            additionalProperties = [useTags: "true"]
+        }
+    }
+    compileJava.dependsOn(taskName)
 }
 
-task openApiGenerateRegular(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
-    generatorName = "spring"
-    inputSpec = "$rootDir/src/main/resources/swagger/regular.yml".toString()
-    outputDir = "$buildDir/openapi".toString()
-    apiPackage = "com.icthh.xm.tmf.ms.resource.web.api"
-    modelPackage = "com.icthh.xm.tmf.ms.resource.web.api.model"
-    apiFilesConstrainedTo = [""]
-    modelFilesConstrainedTo = [""]
-    supportingFilesConstrainedTo = ["ApiUtil.java"]
-    configOptions = [delegatePattern: "true"]
-    validateSpec = true
-    importMappings = [Problem:"org.zalando.problem.Problem"]
+createOpenApiGenerateTask("openApiGenerateAdmin", "admin",
+    "com.icthh.xm.tmf.ms.resource.web.api", "com.icthh.xm.tmf.ms.resource.web.api.model", true)
+createOpenApiGenerateTask("openApiGenerateRegular", "regular",
+    "com.icthh.xm.tmf.ms.resource.web.api", "com.icthh.xm.tmf.ms.resource.web.api.model", true)
+createOpenApiGenerateTask("openApiGenerateV4", "api_v4",
+    "com.icthh.xm.tmf.ms.resource.web.api.v4", "com.icthh.xm.tmf.ms.resource.web.api.model.v4", false)
+tasks.register('allOpenApiGenerate') {
+    dependsOn 'openApiGenerateAdmin', 'openApiGenerateRegular', 'openApiGenerateV4'
 }
-
-task openApiGenerateV4(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask){
-    generatorName = "spring"
-    inputSpec = "$rootDir/src/main/resources/swagger/api_v4.yml".toString()
-    outputDir = "$buildDir/openapi".toString()
-    apiPackage = "com.icthh.xm.tmf.ms.resource.web.api.v4"
-    modelPackage = "com.icthh.xm.tmf.ms.resource.web.api.model.v4"
-    apiFilesConstrainedTo = [""]
-    modelFilesConstrainedTo = [""]
-    supportingFilesConstrainedTo = ["ApiUtil.java"]
-    configOptions = [delegatePattern: "true"]
-    additionalProperties = [useTags: "true"]
-}
-task allOpenApiGenerate(dependsOn: ['openApiGenerateAdmin', 'openApiGenerateRegular', 'openApiGenerateV4'])
 
 sourceSets {
     main {
         java {
-            srcDir file("${project.buildDir.path}/openapi/src/main/java")
+            srcDir file(layout.buildDirectory.dir("openapi/src/main/java").get().asFile)
         }
     }
 }
-
-compileJava.dependsOn("allOpenApiGenerate")

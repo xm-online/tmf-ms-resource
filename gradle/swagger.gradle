@@ -26,7 +26,12 @@ void createOpenApiGenerateTask(String taskName, String ymlName, String apiPackag
         apiFilesConstrainedTo = [""]
         modelFilesConstrainedTo = [""]
         supportingFilesConstrainedTo = ["ApiUtil.java"]
-        configOptions = [delegatePattern: "true", title: "resource", useSpringBoot3: "true", useJakartaEe: "true"]
+        configOptions = [delegatePattern: "true", useSpringBoot3: "true", useJakartaEe: "true",
+                         // Jackson 3 deserializes through a required-args constructor: absent fields became null
+                         // instead of the model defaults. The 4.x generator had no such constructor
+                         generatedConstructorWithRequiredArgs: "false",
+                         // the 4.x generator left unset collections null, generator 7 initializes them with []
+                         containerDefaultToNull: "true"]
         if (strict) {
             validateSpec = true
             importMappings = [Problem:"org.zalando.problem.Problem"]

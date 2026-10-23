@@ -1,6 +1,5 @@
 package com.icthh.xm.tmf.ms.resource.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import com.icthh.xm.commons.lep.LogicExtensionPoint;
 import com.icthh.xm.commons.lep.spring.LepService;
 import com.icthh.xm.commons.permission.annotation.PrivilegeDescription;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Component;
 @LepService(group = "service")
 public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
 
-    @Timed
     @LogicExtensionPoint(value = "GetResource", resolver = ProfileChannelKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.GET.LIST')")
     @PrivilegeDescription("Privilege to retrieve a logical resource")
@@ -31,7 +29,6 @@ public class LogicalResourceDelegate implements LogicalResourceApiDelegate {
         return ResponseEntity.ok().build();
     }
 
-    @Timed
     @LogicExtensionPoint(value = "ListResource", resolver = ProfileChannelKeyResolver.class)
     @PreAuthorize("hasPermission({'id': #id, 'profile': @headerRequestExtractor.get('profile')}, 'RESOURCE.LOGICAL.LIST')")
     @PrivilegeDescription("Privilege to list logical resource")

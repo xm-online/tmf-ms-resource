@@ -30,7 +30,7 @@ To edit the `api.yml` definition file, you can use a tool such as [Swagger-Edito
 
 Refer to [Doing API-First development][] for more details.
 
-## Kafka connection
+### Kafka connection
 
 The connection to Kafka (SASL login and password, SSL, OAUTHBEARER, GSSAPI, `spring.ssl.bundle`) is set by environment
 variables, `PLAINTEXT` when they are not set. The full sets of variables for each `security.protocol` and

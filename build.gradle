@@ -33,6 +33,7 @@ ext["jackson-bom.version"] = jacksonVersion
 ext["jackson-2-bom.version"] = jackson2Version
 ext["httpclient5.version"] = httpClient5Version
 ext["httpcore5.version"] = httpCore5Version
+ext["opentelemetry.version"] = opentelemetryVersion
 ext["postgresql.version"] = postgresqlVersion
 
 dependencyManagement {
